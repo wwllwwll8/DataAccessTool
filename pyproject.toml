@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "data-access-tool"
+version = "0.1.0"
+description = "Unified data access interface for SQL, JSON, and graph backends."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "DataAccessTool Team" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.0",
+  "pytest-cov>=5.0.0",
+  "ruff>=0.6.0",
+  "mypy>=1.11.0",
+  "pre-commit>=3.8.0",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "--strict-markers --cov=src/data_access_tool --cov-report=term-missing --cov-fail-under=90"
+testpaths = ["tests"]
+markers = [
+  "unit: unit tests",
+  "integration: integration tests",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["data_access_tool"]
+mypy_path = "src"
